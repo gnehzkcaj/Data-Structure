@@ -1,3 +1,4 @@
+import math
 def for_loop(n: int) -> int:
     """for 循环"""
     res = 0
@@ -49,7 +50,7 @@ def recur(n: int) -> int:
     # 归：返回结果
     return n + res
 
-def tail_recur(n, res):
+def tail_recur(n, res) -> int:
     """尾递归"""
     # 终止条件
     if n == 0:
@@ -83,6 +84,64 @@ def for_loop_recur(n: int) -> int:
     # res = 1+2+3+...+n
     return res
 
+def bubble_sort(nums: list[int]) -> int:
+    """平方阶（冒泡排序）"""
+    count = 0  # 计数器
+    # 外循环：未排序区间为 [0, i]
+    for i in range(len(nums) - 1, 0, -1):
+        # 内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端
+        for j in range(i):
+            if nums[j] > nums[j + 1]:
+                # 交换 nums[j] 与 nums[j + 1]
+                tmp: int = nums[j]
+                nums[j] = nums[j + 1]
+                nums[j + 1] = tmp
+                count += 3  # 元素交换包含 3 个单元操作
+    return count
+
+def exponential(n: int) -> int:
+    """指数阶（循环实现）"""
+    count = 0
+    base = 1
+    # 细胞每轮一分为二，形成数列 1, 2, 4, 8, ..., 2^(n-1)
+    for i in range(n):
+        for i in range(base):
+            count += 1
+        base *= 2
+    # count = 1 + 2 + 4 + 8 + .. + 2^(n-1) = 2^n - 1
+    return count
+
+def logarithmic(n: float) -> int:
+    """对数阶（循环实现）"""
+    count = 0
+    while n > 1:
+        n = n / 2
+        count += 1
+        print("count", count)
+    return count
+
+def log2(n):
+  """Calculates the base-2 logarithm of a number."""
+  return math.log(n) / math.log(2)
+
+def log_recur(n: float) -> int:
+    """对数阶（递归实现）"""
+    if n <= 1:
+        return 0
+    return log_recur(n / 2) + 1
+
+print(log_recur(10))
+
+print(logarithmic(10))
+print(log2(10))
+print(exponential(8))
+x=2**8-1
+print(x)
+nums=[21,22,23,24,25,26,27,28,29,30,1, 2, 3, 4, 5, 6, 7, 19,20]
+print(bubble_sort(nums))
+print(nums)
+
+print(for_loop_recur(5))
 print(for_loop_recur(5))
 print('*'*8)  
 print(fib(5))
